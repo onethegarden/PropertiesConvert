@@ -1,0 +1,26 @@
+{
+  "name": "fileio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "oracledb": "^5.1.0",
+    "properties": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onethegarden/PropertiesConvert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onethegarden/PropertiesConvert/issues"
+  },
+  "homepage": "https://github.com/onethegarden/PropertiesConvert#readme"
+}
