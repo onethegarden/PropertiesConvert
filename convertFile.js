@@ -1,6 +1,6 @@
-//const properties = require("properties");
 import properties from "properties";
 import { insertProperties, selectProperties } from "./oracleDB/oracleConnect";
+import fs from "fs";
 
 export const readPropertiesDB = async () => {
   const data = await selectProperties();
@@ -44,5 +44,25 @@ export const propertiesToJSON = (file) => {
     if (error) return console.error(error);
 
     console.log(obj);
+  });
+};
+
+export const writePropertiesFile = (path, jsonData) => {
+  const dict = {};
+  jsonData.forEach((proper) => {
+    dict[proper.KEY] = proper.TEXT;
+  });
+
+  const data = properties.stringify(dict);
+
+  fs.open(path, "a+", function (err, fd) {
+    if (err) throw err;
+    if (fd == "9") {
+      console.log("file create.");
+    } else {
+      fs.writeFile(path, data, "utf8", function (error) {
+        console.log("write end");
+      });
+    }
   });
 };

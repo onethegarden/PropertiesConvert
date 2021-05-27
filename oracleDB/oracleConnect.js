@@ -51,7 +51,7 @@ export async function selectProperties() {
 
     connection = await oracledb.getConnection(dbConfig);
 
-    sql = `SELECT * FROM PROPERTIES`;
+    sql = `SELECT * FROM TAB`;
 
     binds = {};
 
@@ -89,11 +89,7 @@ export async function createTable() {
 
     connection = await oracledb.getConnection(dbConfig);
 
-    const stmts = [
-      `DROP TABLE no_example`,
-
-      `CREATE TABLE no_example (id NUMBER, data VARCHAR2(20))`,
-    ];
+    const stmts = [`DROP TABLE no_example`, `CREATE TABLE no_example (id NUMBER, data VARCHAR2(20))`];
 
     for (const s of stmts) {
       try {
