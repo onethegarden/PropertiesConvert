@@ -62,3 +62,5 @@
   properties :  https://www.npmjs.com/package/properties
 
   esm : https://www.npmjs.com/package/esm
+  
+  엑셀 적용 고려 : https://www.npmjs.com/package/export-from-json

@@ -4,13 +4,27 @@ import { insertPropertiesFile, readPropertiesDB, propertiesToJSON, writeProperti
 //환경변수 설정
 dotenv.config();
 
-const filePath = `${__dirname}/test_example`;
+const filePath = `${__dirname}/test_example/login`;
 
-//properties 파일 내용 읽어서 json으로 바꾸기
-propertiesToJSON(`${filePath}/test.properties`);
+const propertiesToJsonConverter = async(propertiesFilePath) =>{
+  const result = await propertiesToJSON(propertiesFilePath);
+  console.log(result)
+}
+//변환할 언어의 리스트 , 이 길이만큼 properties를 찾아서 돌릴 것임
+const languageList = ['en', 'es', 'fr', 'ko', 'ru'];
+//fileName, 이 이름으로 path를 찾고, db에 저장함
+const fileName = 'signIn'
 
-//properties 파일 읽어서 그대로 oracledb에 넣기
-//insertPropertiesFile(`${filePath}/test_ko.properties`);
+languageList.forEach(language => {
+  // 1. properties 파일 내용 읽어서 json으로 바꾸고
+  // 2. 동일한 디렉토리에 확장자명 바꿔서 json파일로 저장
+  propertiesToJsonConverter(`${filePath}/${fileName}_${language}.properties`);
+
+  //propertiesDLFRRH db 넣기
+  insertPropertiesFile({ file: `${filePath}/${fileName}_${language}.properties`, fileName: fileName, lang: language });
+
+})
+
 
 //db에 넣은 파일 읽기
 //readPropertiesDB();
@@ -29,8 +43,11 @@ const tempData = [
   },
 ];
 
-const writePath = `${__dirname}/test_example/test.properties`;
-writePropertiesFile(writePath, tempData);
+//properties로 만들기
+//const writePath = `${__dirname}/test_example/test.properties`;
+//writePropertiesFile(writePath);
+
+
 /***** 실행 *****/
 //node -r esm index.js
 

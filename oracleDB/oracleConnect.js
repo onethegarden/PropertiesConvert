@@ -12,14 +12,15 @@ export async function insertProperties(bindData) {
     let sql, options, result;
 
     connection = await oracledb.getConnection(dbConfig);
-    sql = `INSERT INTO PROPERTIES VALUES (:key, :lang, :text)`;
+    sql = `INSERT INTO TEST_TRANSLATION VALUES (:fileName, :key, :lang, :text)`;
 
     options = {
       autoCommit: true,
       bindDefs: [
         { type: oracledb.STRING, maxSize: 300 },
+        { type: oracledb.STRING, maxSize: 300 },
         { type: oracledb.STRING, maxSize: 2 },
-        { type: oracledb.STRING, maxSize: 500 },
+        { type: oracledb.STRING, maxSize: 4000 },
       ],
     };
     //bindData Array형태여야 함
@@ -51,7 +52,7 @@ export async function selectProperties() {
 
     connection = await oracledb.getConnection(dbConfig);
 
-    sql = `SELECT * FROM TAB`;
+    sql = `SELECT * FROM TEST_EXCEL_TRANSLATION`;
 
     binds = {};
 
